@@ -1,0 +1,79 @@
+https://leetcode.com/problems/group-anagrams/description/
+
+49. Group Anagrams
+Solved
+Medium
+Topics
+premium lock icon
+Companies
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+Explanation:
+
+There is no string in strs that can be rearranged to form "bat".
+The strings "nat" and "tan" are anagrams as they can be rearranged to form each other.
+The strings "ate", "eat", and "tea" are anagrams as they can be rearranged to form each other.
+Example 2:
+
+Input: strs = [""]
+
+Output: [[""]]
+
+Example 3:
+
+Input: strs = ["a"]
+
+Output: [["a"]]
+
+ 
+
+Constraints:
+
+1 <= strs.length <= 104
+0 <= strs[i].length <= 100
+strs[i] consists of lowercase English letters.
+
+solution:
+1.
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map=new HashMap<>();
+        for(String str:strs){
+            int[] asc=new int[26];
+            for(int ch:str.toCharArray()){
+                asc[(int)ch-97]++;
+            }
+            String key=Arrays.toString(asc);
+            map.computeIfAbsent(key,k->new ArrayList<>()).add(str);
+        }
+        return new ArrayList<>(map.values());
+    }
+}
+Time Complexity: O(N*K) where N is the number of strings and K is the maximum length of a string.
+Space Complexity: O(N*K) for the output list and the hashmap.
+2.
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String,List<String>> map=new HashMap<>();
+        for(String s:strs){
+            char arr[]=s.toCharArray();
+            Arrays.sort(arr);
+            String sorted=new String(arr);
+            if(!map.containsKey(sorted)){
+                map.put(sorted,new ArrayList<>());
+            }
+            map.get(sorted).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
+}
+Time Complexity: O(N*KlogK) where N is the number of strings and K is the maximum length of a string.
+Space Complexity: O(N*K) for the output list and the hashmap.
