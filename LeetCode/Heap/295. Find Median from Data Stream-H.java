@@ -61,7 +61,7 @@ class MedianFinder {
     
     public void addNum(int num) {
         left.offer(num);
-        right.offer(left.poll());z
+        right.offer(left.poll());
         if(right.size()>left.size()){
             left.add(right.poll());
         }        
