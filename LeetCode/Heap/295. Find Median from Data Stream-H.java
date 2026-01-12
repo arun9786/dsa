@@ -51,29 +51,43 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 
 class MedianFinder {
-    Queue<Integer> left; // left half max-heap
-    Queue<Integer> right; // right half min-heap
 
+    Queue<Integer> left;
+    Queue<Integer> right;
     public MedianFinder() {
-        left=new PriorityQueue<>((a,b)->b-a);
-        right=new PriorityQueue<>();
+        left = new PriorityQueue<>((a,b)->b-a);
+        right = new PriorityQueue<>();
     }
     
     public void addNum(int num) {
-        left.offer(num);
-        right.offer(left.poll());
+        if(left.isEmpty() || num<left.peek()){
+            left.offer(num);
+        } else{
+            right.offer(num);
+        }
+
         if(right.size()>left.size()){
-            left.add(right.poll());
-        }        
+            left.offer(right.poll());
+        } else if(left.size()>right.size()+1){
+            right.offer(left.poll());
+        }
     }
     
     public double findMedian() {
         if(left.size()==right.size()){
             return (left.peek()+right.peek())/2.0;
-        } 
-        return left.peek();
+        } else{
+            return left.peek();
+        }
     }
 }
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder obj = new MedianFinder();
+ * obj.addNum(num);
+ * double param_2 = obj.findMedian();
+ */
 
 Time Complexity: O(log n) for addNum and O(1) for findMedian
 Space Complexity: O(n) - for storing the numbers in heaps
