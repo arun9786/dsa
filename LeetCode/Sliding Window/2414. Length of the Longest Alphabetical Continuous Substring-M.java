@@ -49,3 +49,24 @@ class Solution {
 
 Time Complexity: O(N) where N is the number of characters in the string.
 Space Complexity: O(1) as we are using only constant extra space.
+
+Explanation:
+1. We initialize two pointers, left and right. The left pointer marks the start of the current continuous substring, and the right pointer iterates through the string.
+2. We also maintain a variable maxLen to keep track of the maximum length of continuous substrings found so far.
+3. As we iterate through the string with the right pointer, we check if the current character and the previous character are consecutive in the alphabet by comparing their ASCII values.
+4. If they are consecutive, we update maxLen with the length of the current substring (right - left + 1).
+5. If they are not consecutive, we move the left pointer to the current position of the right pointer, effectively starting a new substring.
+6. Finally, we return maxLen, which contains the length of the longest alphabetical continuous substring found in the input string.
+
+Example Walkthrough:
+Consider the input string s = "abacaba".
+- Initialize left = 0, maxLen = 1.
+- Start iterating with right from index 1:
+  - right = 1: 'b' and 'a' are consecutive, maxLen = 2.
+  - right = 2: 'a' and 'b' are not consecutive, move left to 2.
+  - right = 3: 'c' and 'a' are not consecutive, move left to 3.
+  - right = 4: 'a' and 'c' are not consecutive, move left to 4.
+  - right = 5: 'b' and 'a' are not consecutive, move left to 5. 
+  - right = 6: 'a' and 'b' are not consecutive, move left to 6.
+
+finally, maxLen = 2, which is the length of the longest continuous substring "ab".

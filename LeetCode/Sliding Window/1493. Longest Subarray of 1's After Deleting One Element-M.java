@@ -56,3 +56,26 @@ class Solution {
 }
 Time Complexity: O(N) where N is the number of elements in the array.
 Space Complexity: O(1) as we are using only constant extra space.
+
+Explanation:
+1. We use a sliding window approach with two pointers, left and right, to maintain a window of elements in the array.
+2. We also maintain a count of zeros (zeroCount) within the current window.
+3. As we expand the right pointer, we increment zeroCount whenever we encounter a 0.
+4. If zeroCount exceeds 1, we move the left pointer to the right until we have at most one 0 in the window, decrementing zeroCount as we move past zeros.
+5. We calculate the maximum length of the window (right - left) at each step, which represents the longest subarray of 1s after deleting one element.
+6. Finally, we return the maximum length found.
+
+Example Walkthrough:
+Consider the input array nums = [0,1,1,1,0,1,1,0,1]
+
+- Initialize left = 0, zeroCount = 0, max = 0.
+- right = 0: nums[0] = 0, zeroCount = 1, max = 0 (window: [0])
+- right = 1: nums[1] = 1, zeroCount = 1, max = 1 (window: [0, 1])
+- right = 2: nums[2] = 1, zeroCount = 1, max = 2 (window: [0, 1, 1])
+- right = 3: nums[3] = 1, zeroCount = 1, max = 3 (window: [0, 1, 1, 1])
+- right = 4: nums[4] = 0, zeroCount = 2. Since zeroCount > 1:
+    - Move left pointer to the right until we have at most one zero in the window.
+    - left becomes index of first zero in current window.
+    - Now window is [1,1], and we continue.
+- Continue this process for all elements in the array.
+The longest subarray of 1s after deleting one element is of length 5, which occurs after deleting the 0 at index 4.

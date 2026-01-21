@@ -83,3 +83,18 @@ class Solution {
 
 Time Complexity: O(N log k) where N is the total number of nodes across all lists and k is the number of lists.
 Space Complexity: O(k) for the min heap.
+
+Explanation:
+1. We use a min-heap (priority queue) to efficiently get the smallest node among the heads of the k lists.
+2. We initialize the min-heap with the head nodes of all non-empty lists.
+3. We repeatedly extract the smallest node from the heap, add it to the merged list, and if that node has a next node, we insert the next node into the heap.
+4. This process continues until the heap is empty, meaning all nodes have been merged into the final sorted list.
+
+Explanation with Example:
+Consider the input lists: [[1,4,5],[1,3,4],[2,6]]
+- We start by adding the head nodes (1, 1, 2) to the min-heap.
+- The heap now contains [1, 1, 2].
+- We extract the smallest node (1 from the first list) and add it to the merged list. The merged list is now [1].
+- We then add the next node (4) from the first list to the heap. The heap now contains [1, 2, 4].
+- We repeat this process, always extracting the smallest node and adding its next node to the heap, until all nodes are merged.
+- The final merged list will be [1, 1, 2, 3, 4, 4, 5, 6].

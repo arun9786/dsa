@@ -61,3 +61,20 @@ class Solution {
 Time Complexity: O(N*26) where N is the length of string s.
 Space Complexity: O(1) as we are using fixed size arrays of length 26.
 
+Explanation:
+1. We create two arrays arrs and arrd of size 26 to store the frequency of characters in string p and the current window in string s respectively.
+2. We iterate through string s using a sliding window approach. The right pointer expands the window by adding characters to arrd, and when the window size exceeds the length of p, we move the left pointer to shrink the window by removing characters from arrd.
+3. After updating arrd for each character, we check if arrs and arrd are equal. If they are, it means the current window is an anagram of p, and we add the left index to the result list.
+4. Finally, we return the list of starting indices of anagrams found in s.
+
+Explanation with example:
+Consider s = "cbaebabacd" and p = "abc".
+- We first populate arrs with the frequency of characters in p:
+  arrs['a' - 'a'] = 1
+  arrs['b' - 'a'] = 1
+  arrs['c' - 'a'] = 1
+- We then iterate through s with a sliding window of size equal to p:
+  - For the first window "cba", arrd will match arrs, so we add index 0 to the result.
+  - We continue sliding the window and updating arrd.
+  - When we reach the window "bac" starting at index 6, arrd again matches arrs, so we add index 6 to the result.
+- The final result is [0, 6].

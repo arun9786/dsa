@@ -91,3 +91,17 @@ class MedianFinder {
 
 Time Complexity: O(log n) for addNum and O(1) for findMedian
 Space Complexity: O(n) - for storing the numbers in heaps
+
+Explanation:
+1. We use two heaps: a max-heap (left) to store the smaller half of the numbers and a min-heap (right) to store the larger half.
+2. When adding a number, we decide which heap to add it to based on its value.
+3. After adding, we balance the heaps to ensure that the size difference is at most 1.
+4. To find the median, if both heaps are of equal size, we return the average of the two top elements. If not, we return the top of the max-heap (left).
+
+Explanation with Example:
+Consider the input sequence: [1, 2, 3]
+- Add 1: left = [1], right = []
+- Add 2: left = [1], right = [2]
+- Find Median: (1 + 2) / 2 = 1.5
+- Add 3: left = [2, 1], right = [3]
+- Find Median: 2.0

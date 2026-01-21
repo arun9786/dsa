@@ -9,42 +9,59 @@ public class Main {
             Paths.get("/Users/arunr/documents/dsa/leetcode");
 
     public static void main(String[] args) throws IOException {
-        int totalProblems = 10;
-        pickProblems(totalProblems, null);
-        //pickProblems(totalProblems, Set.of("Medium"));
+        int totalProblems = 15;
+        // Distribution: 20% Easy, 60% Medium, 20% Hard
+        int easyCount = (int) Math.round(totalProblems * 0.20);
+        int mediumCount = (int) Math.round(totalProblems * 0.60);
+        int hardCount = totalProblems - easyCount - mediumCount;
+        
+        pickProblems(easyCount, mediumCount, hardCount);
     }
 
     // ===================== MAIN LOGIC =====================
-    private static void pickProblems(int totalProblems, Set<String> difficultyFilter)
+    private static void pickProblems(int easyCount, int mediumCount, int hardCount)
         throws IOException {
 
           Map<Integer, String> questions = getProblemDifficultyMap(ROOT_DIR);
 
-          boolean allowAll = difficultyFilter == null || difficultyFilter.isEmpty();
-
-          // Step 1: Filter questions
-          List<Integer> eligible = new ArrayList<>();
+          // Step 1: Separate questions by difficulty
+          List<Integer> easyQuestions = new ArrayList<>();
+          List<Integer> mediumQuestions = new ArrayList<>();
+          List<Integer> hardQuestions = new ArrayList<>();
+          
           questions.forEach((id, diff) -> {
-               if (allowAll || difficultyFilter.contains(diff)) {
-                    eligible.add(id);
+               if (diff.equals("Easy")) {
+                    easyQuestions.add(id);
+               } else if (diff.equals("Medium")) {
+                    mediumQuestions.add(id);
+               } else if (diff.equals("Hard")) {
+                    hardQuestions.add(id);
                }
           });
 
-          if (eligible.isEmpty()) {
-               System.out.println("❌ No questions available for selected difficulty");
-               return;
+          // Step 2: Shuffle each difficulty group
+          Collections.shuffle(easyQuestions);
+          Collections.shuffle(mediumQuestions);
+          Collections.shuffle(hardQuestions);
+
+          // Step 3: Pick limited number from each difficulty
+          int selectedEasy = Math.min(easyCount, easyQuestions.size());
+          int selectedMedium = Math.min(mediumCount, mediumQuestions.size());
+          int selectedHard = Math.min(hardCount, hardQuestions.size());
+
+          System.out.println(String.format("Easy (%d/%d):", selectedEasy, easyCount));
+          for (int i = 0; i < selectedEasy; i++) {
+               System.out.println((i+1) + ". " + easyQuestions.get(i));
           }
 
-          // Step 2: Shuffle ONCE (this is the key fix)
-          Collections.shuffle(eligible, new Random());
+          System.out.println(String.format("\nMedium (%d/%d):", selectedMedium, mediumCount));
+          for (int i = 0; i < selectedMedium; i++) {
+               System.out.println((i+1) + ". " + mediumQuestions.get(i));
+          }
 
-          // Step 3: Pick first N (no repeats possible)
-          int limit = Math.min(totalProblems, eligible.size());
-
-          System.out.println("\nSelected Problems:");
-          for (int i = 0; i < limit; i++) {
-               int id = eligible.get(i);
-               System.out.println(id + " -> " + questions.get(id));
+          System.out.println(String.format("\nHard (%d/%d):", selectedHard, hardCount));
+          for (int i = 0; i < selectedHard; i++) {
+               System.out.println((i+1) + ". " + hardQuestions.get(i));
           }
      }
 
