@@ -61,3 +61,25 @@ class Solution {
 
 Time Complexity: O(n^2) where n is the length of the input array nums.
 Space Complexity: O(log n) for sorting the array.
+
+Explanation:
+1. We first sort the input array nums.
+2. We then iterate through the array, fixing one element at a time and using two pointers to find pairs that, along with the fixed element, produce a sum closest to the target.
+3. We update the closest sum whenever we find a sum that is closer to the target than the previously recorded closest sum.
+4. If we find a sum that exactly matches the target, we return it immediately.
+5. Finally, we return the closest sum found.
+
+Explanation with example:
+Consider the input nums = [-1,2,1,-4], target = 1
+- After sorting, nums becomes [-4,-1,1,2]
+- We start with i=0 (nums[i]=-4), left=1, right=3
+  - currentSum = -4 + (-1) + 2 = -3 (closestSum = -3)
+  - currentSum < target, move left to 2
+  - currentSum = -4 + 1 + 2 = -1 (closestSum = -1)
+  - currentSum < target, move left to 3
+  - Now left == right, we move to next i
+- i=1 (nums[i]=-1), left=2, right=3
+  - currentSum = -1 + 1 + 2 = 2 (closestSum = 2)
+  - currentSum > target, move right to 2
+  - Now left == right, we stop.
+- The closest sum to target 1 is 2, so we return 2.

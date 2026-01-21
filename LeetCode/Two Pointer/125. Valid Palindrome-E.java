@@ -58,3 +58,20 @@ class Solution {
 
 Time Complexity: O(n) where n is the length of the input string s.
 Space Complexity: O(1) as we are using only constant extra space.
+
+Explanation:
+1. We initialize two pointers, left and right, to the start and end of the string, respectively.
+2. We move the left pointer to the right until we find an alphanumeric character.
+3. We move the right pointer to the left until we find an alphanumeric character.
+4. We compare the characters at the left and right pointers after converting them to lowercase.
+5. If they are not equal, we return false.
+6. If they are equal, we move both pointers inward and repeat the process until the pointers meet or cross.
+7. If we complete the process without finding any mismatches, we return true.
+Explanation with example::
+Consider the input s = "A man, a plan, a canal: Panama"
+- Initialize left = 0, right = 29
+- Move left to 0 (A) and right to 28 (a), compare 'a' and 'a' -> equal
+- Move left to 1 (space) and right to 27 (m), skip space, compare 'm' and 'm' -> equal
+- Move left to 3 (m) and right to 26 (a), compare 'm' and 'a' -> equal
+- Continue this process until left >= right
+- Since all comparisons are equal, return true

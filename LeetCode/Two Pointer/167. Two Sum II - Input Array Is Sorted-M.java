@@ -61,3 +61,18 @@ class Solution {
 
 Time Complexity: O(n) where n is the length of the input array numbers.
 Space Complexity: O(1) since we are using only constant extra space.
+
+Explanation:
+1. We initialize two pointers, left at the start and right at the end of the array.
+2. We calculate the sum of the elements at these two pointers.
+3. If the sum equals the target, we return the indices (1-indexed).
+4. If the sum is greater than the target, we move the right pointer to the left to decrease the sum.
+5. If the sum is less than the target, we move the left pointer to the right to increase the sum.
+6. We repeat this process until we find the two numbers that add up to the target.
+Explanation with example::
+Consider the input numbers = [2,7,11,15], target = 9
+- Initialize left = 0, right = 3 (last index)
+- Calculate sum: 2 + 15 = 17, which is greater than target (9), so move right pointer to 2
+- Calculate sum: 2 + 11 = 13, which is greater than target (9), so move right pointer to 1
+- Calculate sum: 2 + 7 = 9, which equals target (9), so return [1, 2] (1-indexed)
+- The output is [1, 2] since the numbers at these indices add up to the target.

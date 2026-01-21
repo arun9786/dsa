@@ -72,3 +72,30 @@ class Solution {
 
 Time Complexity: O(n^2) due to the nested loops after sorting.
 Space Complexity: O(1) if we ignore the space required for the output list.
+
+Explanation:
+1. We first sort the input array to make it easier to avoid duplicates and use the two-pointer technique.
+2. We iterate through the array, fixing one element at a time and using two pointers to find pairs that sum to the negative of the fixed element.
+3. If we find a triplet that sums to zero, we add it to the result list and move the pointers while skipping duplicates.
+4. We continue this process until we have checked all elements in the array.
+Explanation with example::
+Consider the input nums = [-1,0,1,2,-1,-4]
+- After sorting, nums becomes [-4,-1,-1,0,1,2]
+- We start with i=0 (nums[i]=-4), left=1, right=5
+  - sum = -4 + (-1) + 2 = -3 (less than 0, move left)
+  - left=2, sum = -4 + (-1) + 2 = -3 (less than 0, move left)
+  - left=3, sum = -4 + 0 + 2 = -2 (less than 0, move left)
+  - left=4, sum = -4 + 1 + 2 = -1 (less than 0, move left)
+  - left=5, loop ends
+- i=1 (nums[i]=-1), left=2, right=5
+  - sum = -1 + (-1) + 2 = 0 (found triplet)
+  - Add [-1,-1,2] to result, move left and right while skipping duplicates
+  - left=3, right=4
+  - sum = -1 + 0 + 1 = 0 (found triplet)
+  - Add [-1,0,1] to result, move left and right while skipping duplicates
+  - left=4, right=3, loop ends
+- i=2 (nums[i]=-1), skip since its a duplicate
+- i=3 (nums[i]=0), left=4, right=5
+  - sum = 0 + 1 + 2 = 3 (greater than 0, move right)
+  - right=4, loop ends
+- Final result: [[-1,-1,2],[-1,0,1]]

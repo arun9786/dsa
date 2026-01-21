@@ -76,3 +76,30 @@ class Solution {
 
 Time Complexity: O(n) for traversing the array multiple times.
 Space Complexity: O(n) for storing the left max and right max arrays.
+
+Explanation:
+1. We use two pointers, left and right, starting from the beginning and end of the array respectively.
+2. We maintain two variables, lmax and rmax, to keep track of the maximum height encountered from the left and right sides.
+3. We iterate until the left pointer is less than the right pointer.
+4. At each step, we compare the heights at the left and right pointers.
+5. If the height at the left pointer is less than that at the right pointer, we update lmax and calculate the water that can be trapped at the left pointer.
+6. We then move the left pointer to the right.
+7. If the height at the right pointer is less than or equal to that at the left pointer, we update rmax and calculate the water that can be trapped at the right pointer.
+8. We then move the right pointer to the left.
+9. Finally, we return the total water trapped.
+Explanation with example::
+Consider the input height = [0,1,0,2,1,0,1,3,2,1,2,1]
+- Initialize left = 0, right = 11, lmax = 0, rmax = 0, waterCount = 0
+- height[0] < height[11]: lmax = max(0, 0) = 0, waterCount += 0 - 0 = 0, left = 1
+- height[1] < height[11]: lmax = max(0, 1) = 1, waterCount += 1 - 1 = 0, left = 2
+- height[2] < height[11]: lmax = max(1, 0) = 1, waterCount += 1 - 0 = 1, left = 3
+- height[3] < height[11]: lmax = max(1, 2) = 2, waterCount += 2 - 2 = 0, left = 4
+- height[4] < height[11]: lmax = max(2, 1) = 2, waterCount += 2 - 1 = 1, left = 5
+- height[5] < height[11]: lmax = max(2, 0) = 2, waterCount += 2 - 0 = 2, left = 6
+- height[6] < height[11]: lmax = max(2, 1) = 2, waterCount += 2 - 1 = 1, left = 7
+- height[7] >= height[11]: rmax = max(0, 1) = 1, waterCount += 1 - 1 = 0, right = 10
+- height[7] >= height[10]: rmax = max(1, 2) = 2, waterCount += 2 - 2 = 0, right = 9
+- height[7] >= height[9]: rmax = max(2, 1) = 2, waterCount += 2 - 1 = 1, right = 8
+- height[7] >= height[8]: rmax = max(2, 2) = 2, waterCount += 2 - 2 = 0, right = 7
+- Now left == right, we stop.
+- The total water trapped is 6, so we return 6.

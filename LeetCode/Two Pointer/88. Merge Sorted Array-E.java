@@ -73,3 +73,26 @@ class Solution {
 
 Time Complexity: O(m + n) where m and n are the lengths of nums1 and nums2 respectively.
 Space Complexity: O(1) as we are merging in-place without using any extra space.
+
+Explanation:
+1. We initialize three pointers: li for the last element of the first m elements in nums1, ri for the last element of nums2, and ti for the last position in nums1 where we will place the largest element.
+2. We compare the elements pointed by li and ri, placing the larger one at the position pointed by ti, and then move the respective pointers accordingly.
+3. After one of the arrays is exhausted, we copy any remaining elements from nums2 to nums1 (if any).
+4. The remaining elements in nums1 are already in place, so no further action is needed for them.
+
+Explanation with Example:
+Consider the input:
+nums1 = [1,2,3,0,0,0], m = 3
+nums2 = [2,5,6], n = 3
+- Initialize li = 2 (pointing to 3), ri = 2 (pointing to 6), ti = 5 (last index of nums1)
+- Compare nums1[li] and nums2[ri]:
+  - 3 < 6, so place 6 at nums1[ti], now nums1 = [1,2,3,0,0,6], ti = 4, ri = 1
+- Compare nums1[li] and nums2[ri]:
+  - 3 < 5, so place 5 at nums1[ti], now nums1 = [1,2,3,0,5,6], ti = 3, ri = 0
+- Compare nums1[li] and nums2[ri]:
+  - 3 >= 2, so place 3 at nums1[ti], now nums1 = [1,2,3,3,5,6], ti = 2, li = 1
+- Compare nums1[li] and nums2[ri]:
+  - 2 >= 2, so place 2 at nums1[ti], now nums1 = [1,2,2,3,5,6], ti = 1, li = 0
+- Compare nums1[li] and nums2[ri]:
+  - 1 < 2, so place 2 at nums1[ti], now nums1 = [1,2,2,3,5,6], ti = 0, ri = -1
+- Now ri < 0, so we stop. The final merged array is nums1 = [1,2,2,3,5,6].

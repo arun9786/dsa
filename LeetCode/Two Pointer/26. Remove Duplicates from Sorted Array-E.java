@@ -77,3 +77,23 @@ class Solution {
 }
 Time Complexity: O(n) where n is the length of the input array nums.
 Space Complexity: O(1) since we are using only constant extra space.
+
+Explanation:
+1. We initialize a pointer ind to 1, which will track the position to insert the next unique element.
+2. We iterate through the array starting from the second element.
+3. If the current element is different from the previous one, we place it at the index ind and increment ind.
+4. Finally, we return ind, which represents the number of unique elements in the array.
+Explanation with Example:
+Consider the input array nums = [0,0,1,1,1,2,2,3,3,4]
+- We start with ind = 1.
+- We iterate through the array:
+  - i = 1: nums[1] = 0, same as nums[0], continue.
+  - i = 2: nums[2] = 1, different from nums[1], set nums[1] = 1, ind = 2.
+  - i = 3: nums[3] = 1, same as nums[2], continue.
+  - i = 4: nums[4] = 1, same as nums[3], continue.
+  - i = 5: nums[5] = 2, different from nums[4], set nums[2] = 2, ind = 3.
+  - i = 6: nums[6] = 2, same as nums[5], continue.
+  - i = 7: nums[7] = 3, different from nums[6], set nums[3] = 3, ind = 4.
+  - i = 8: nums[8] = 3, same as nums[7], continue.
+  - i = 9: nums[9] = 4, different from nums[8], set nums[4] = 4, ind = 5.
+- Finally, we return ind = 5, and the first five elements of nums are [0, 1, 2, 3, 4].

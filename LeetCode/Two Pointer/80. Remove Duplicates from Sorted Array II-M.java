@@ -65,3 +65,21 @@ class Solution {
 }
 Time Complexity: O(n) where n is the length of the input array nums.
 Space Complexity: O(1) since we are using only constant extra space.
+
+Explanation:
+1. We initialize an index ind to keep track of the position to insert the next valid element.
+2. We iterate through each value in the nums array.
+3. For each value, we check if ind is less than 2 (to allow the first two elements) or if the current value is greater than the element at position ind-2 (to ensure no more than two duplicates).
+4. If either condition is true, we insert the current value at position ind and increment ind.
+5. Finally, we return ind, which represents the length of the modified array with at most two duplicates for each unique element.
+Explanation with Example:
+Consider the input array nums = [1,1,1,2,2,3].
+- Start with ind = 0.
+- Iterate through each value in nums:
+  - For the first 1: ind < 2, so insert 1 at nums[0], ind becomes 1.
+  - For the second 1: ind < 2, so insert 1 at nums[1], ind becomes 2.
+  - For the third 1: 1 is not greater than nums[0] (which is 1), so skip it.
+  - For the first 2: 2 > nums[0] (which is 1), so insert 2 at nums[2], ind becomes 3.
+  - For the second 2: 2 > nums[1] (which is 1), so insert 2 at nums[3], ind becomes 4.
+  - For 3: 3 > nums[2] (which is 2), so insert 3 at nums[4], ind becomes 5.
+- The modified array is now [1,1,2,2,3,_], and we return 5 as the length of the valid portion.

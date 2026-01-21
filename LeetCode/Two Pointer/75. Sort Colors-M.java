@@ -84,3 +84,25 @@ class Solution {
 
 Time Complexity: O(n) for single pass through the array.
 Space Complexity: O(1) for using constant extra space.
+
+Explanation:
+1. We maintain three pointers: left, mid, and right.
+2. The left pointer tracks the position to place the next 0, the right pointer tracks the position to place the next 2, and the mid pointer is used to traverse the array. 
+3. We first move the left pointer to skip all leading 0s and the right pointer to skip all trailing 2s.
+4. We then iterate through the array with the mid pointer:
+   - If we encounter a 0, we swap it with the element at the left pointer and move both left and mid pointers forward.
+   - If we encounter a 2, we swap it with the element at the right pointer and move the right pointer backward.
+   - If we encounter a 1, we simply move the mid pointer forward.
+5. This ensures that all 0s are moved to the front, all 2s to the back, and all 1s remain in the middle.
+Explanation with example:
+Consider the input nums = [2,0,2,1,1,0]
+- Initially, left=0, mid=0, right=5
+- After moving left and right pointers, left=0, right=5 (no leading 0s or trailing 2s)
+- mid=0: nums[mid]=2, swap with nums[right], right=4 -> nums=[0,0,2,1,1,2]
+- mid=0: nums[mid]=0, swap with nums[left], left=1, mid=1 -> nums=[0,0,2,1,1,2]
+- mid=1: nums[mid]=0, swap with nums[left], left=2, mid=2 -> nums=[0,0,2,1,1,2]
+- mid=2: nums[mid]=2, swap with nums[right], right=3 -> nums=[0,0,1,1,2,2]
+- mid=2: nums[mid]=1, mid=3
+- mid=3: nums[mid]=1, mid=4
+- Now mid > right, we stop.
+- The sorted array is [0,0,1,1,2,2].
