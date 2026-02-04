@@ -1,0 +1,7 @@
+1. Kth largest/smallest -Priority Queue
+    larget - min heap
+    smallest - max heap
+2. Sub array sum equlas k 
+    i.if contains olny positive inputs - sliding window
+        count(k)=maxCount(k)-maxCount(k-1)
+    ii.else - HashMap+Prefix
