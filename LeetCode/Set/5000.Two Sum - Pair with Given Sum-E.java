@@ -1,6 +1,6 @@
 https://www.geeksforgeeks.org/problems/key-pair5616/1
 
-Two Sum - Pair with Given Sum
+5000.Two Sum - Pair with Given Sum
 Difficulty: EasyAccuracy: 30.61%Submissions: 452K+Points: 2Average Time: 20m
 Given an array arr[] of integers and another integer target. Determine if there exist two distinct indices such that the sum of their elements is equal to the target.
 

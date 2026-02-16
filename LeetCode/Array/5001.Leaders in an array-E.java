@@ -1,6 +1,6 @@
 https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1
 
-Array Leaders
+5001.Array Leaders
 Difficulty: EasyAccuracy: 29.94%Submissions: 980K+Points: 2Average Time: 15m
 You are given an array arr of positive integers. Your task is to find all the leaders in the array. 
 An element is considered a leader if it is greater than or equal to all elements to its right. 
