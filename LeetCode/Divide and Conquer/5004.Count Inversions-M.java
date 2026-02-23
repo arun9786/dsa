@@ -1,6 +1,6 @@
 https://www.geeksforgeeks.org/problems/inversion-of-array-1587115620/1
 
-Count Inversions
+5004.Count Inversions
 Difficulty: MediumAccuracy: 16.93%Submissions: 743K+Points: 4
 Given an array of integers arr[]. You have to find the Inversion Count of the array. 
 Note : Inversion count is the number of pairs of elements (i, j) such that i < j and arr[i] > arr[j].
