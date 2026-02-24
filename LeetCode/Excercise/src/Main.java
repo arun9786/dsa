@@ -5,18 +5,20 @@ import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        System.out.println(majorityElement(new int[]{2,2,1,3,4}));
-    }
-
-    public int majorityElement(int[] nums) {
-        int count=0;
-        Integer candidate=null;
-        for(int num:nums){
-            if(count==0){
-                candidate=num;
-            }
-            count+= (num==candidate)?1:-1;
+        Path leetcodePath = Paths.get("/Users/arunr/Documents/DSA/LeetCode");
+        
+        // Scan all .java files recursively
+        final int[] count = {0};
+        try (Stream<Path> paths = Files.walk(leetcodePath)) {
+            paths.filter(Files::isRegularFile)
+                 .filter(path -> path.toString().endsWith(".java"))
+                 .forEach(path -> {
+                     count[0]++;
+                     System.out.println(path.getFileName());
+                 });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return candidate;
+        System.out.println("Total .java files: " + count[0]);
     }
 }
