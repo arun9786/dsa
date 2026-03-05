@@ -47,35 +47,36 @@ class Solution {
     public String minWindow(String s, String t) {
         Map<Character,Integer> map=new HashMap<>();
         for(char ch:t.toCharArray()){
-            map.put(ch,map.getOrDefault(ch,0)+1);
+            map.put(ch,map.getOrDefault(ch,0)-1);
         }
-        int window=0;
+        int l=0;
+        int startIndex=0;
         int minLen=Integer.MAX_VALUE;
-        int left=0,start=0;
-        for(int right=0;right<s.length();right++){
-            char ch=s.charAt(right);
+        int fulfilled=0;
+        for(int r=0;r<s.length();r++){
+            char ch=s.charAt(r);
             if(map.containsKey(ch)){
-                if(map.get(ch)>0){
-                    window++;
+                if(map.get(ch)<0){
+                    fulfilled++;
                 }
-                map.put(ch,map.get(ch)-1);
+                map.put(ch,map.get(ch)+1);
             }
-            while(window==t.length()){
-                if(right-left+1<minLen){
-                    minLen=right-left+1;
-                    start=left;
+            while(fulfilled==t.length()){
+                if(minLen>(r-l+1)){
+                    minLen=r-l+1;
+                    startIndex=l;
                 }
-                ch=s.charAt(left);
-                if(map.containsKey(ch)){
-                    if(map.get(ch)>=0){
-                        window--;
+                char lch=s.charAt(l);
+                if(map.containsKey(lch)){
+                    if(map.get(lch)==0){
+                        fulfilled--;
                     }
-                    map.put(ch,map.get(ch)+1);
+                    map.put(lch,map.get(lch)-1);
                 }
-                left++;
+                l++;
             }
         }
-        return minLen==Integer.MAX_VALUE ? "":s.substring(start,start+minLen);
+        return minLen==Integer.MAX_VALUE?"":s.substring(startIndex,startIndex+minLen);
     }
 }
 Time Complexity: O(N) where N is the length of string s.

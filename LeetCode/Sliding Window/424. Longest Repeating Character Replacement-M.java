@@ -33,25 +33,60 @@ s consists of only uppercase English letters.
 0 <= k <= s.length
 
 Solution:
+
 class Solution {
     public int characterReplacement(String s, int k) {
-        int arr[]=new int[26];
-        int left=0,right=0;
+        int n=s.length();
+        int l=0;
+        int maxFreq=0;
         int maxLen=0;
-        int maxFreq=-1;
-        for(right=0;right<s.length();right++){
-            char ch=s.charAt(right);
-            arr[(int)ch-65]++;
-            maxFreq=Math.max(maxFreq,arr[(int)ch-65]);
-            while((right-left+1)-maxFreq>k){
-                arr[(int)s.charAt(left)-65]--;
-                maxFreq=Math.max(maxFreq,arr[(int)ch-65]);
-                left++;
+        int[] map=new int[26];
+        for(int r=0;r<n;r++){
+            int ch=s.charAt(r)-'A';
+            map[ch]++;
+            maxFreq=Math.max(maxFreq,map[ch]);
+            int windowLen=r-l+1;
+            while(windowLen-maxFreq>k){
+                int lch=s.charAt(l)-'A';
+                map[lch]--;
+                for(int i=0;i<26;i++){
+                    maxFreq=Math.max(maxFreq,map[i]);
+                }
+                l++;
+                windowLen=r-l+1;
             }
-            maxLen=Math.max((right-left+1),maxLen);
+            maxLen=Math.max(maxLen,r-l+1);
         }
         return maxLen;
-        
+    }
+}
+
+Time Complexity: O(N*26) for traversing the string once and calculating maxFreq in each iteration.
+Space Complexity: O(1) as the array size is fixed to 26.
+
+Optimal:-
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int n=s.length();
+        int l=0;
+        int maxFreq=0;
+        int maxLen=0;
+        int[] map=new int[26];
+        for(int r=0;r<n;r++){
+            int ch=s.charAt(r)-'A';
+            map[ch]++;
+            maxFreq=Math.max(maxFreq,map[ch]);
+            int windowLen=r-l+1;
+            while(windowLen-maxFreq>k){
+                int lch=s.charAt(l)-'A';
+                map[lch]--;
+                maxFreq=Math.max(maxFreq,map[lch]);
+                l++;
+                windowLen=r-l+1;
+            }
+            maxLen=Math.max(maxLen,r-l+1);
+        }
+        return maxLen;
     }
 }
 
